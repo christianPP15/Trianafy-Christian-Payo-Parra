@@ -1,9 +1,10 @@
 import { Router } from 'express';
 import { CancionesController } from '../controllers/CancionesController';
+import { token } from '../servicios/passport';
 const router = Router();
-router.get('/',CancionesController.todasLasCanciones);
-router.post('/',CancionesController.agregarCancion);
-router.get('/:id',CancionesController.buscarPorId);
-router.delete('/:id',CancionesController.eliminarPorId);
-router.put('/:id',CancionesController.editarCancion);
+router.get('/',token(),CancionesController.todasLasCanciones);
+router.post('/',token(),CancionesController.agregarCancion);
+router.get('/:id',token(),CancionesController.buscarPorId);
+router.delete('/:id',token(),CancionesController.eliminarPorId);
+router.put('/:id',token(),CancionesController.editarCancion);
 export default router;
