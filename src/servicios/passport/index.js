@@ -6,7 +6,7 @@ import { Usuario, userRepository } from '../../modelos/Usuario';
 import bcrypt from 'bcryptjs';
 
 passport.use(new LocalStrategy({
-    usernameField: "username",
+    usernameField: "nombre_usuario",
     passwordField: "password",
     session: false
 },async(username, password, done)=> {
@@ -18,7 +18,7 @@ passport.use(new LocalStrategy({
     else
         return done(null, {
             nombre_completo:user.nombre_completo,
-            username:user.username,
+            nombre_usuario:user.nombre_usuario,
             email:user.email
         });
 

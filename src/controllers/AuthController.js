@@ -8,12 +8,12 @@ import { JwtService } from '../servicios/jwt';
 const AuthController = {
 
     register: async(req, res, next) => {
-        let usuarioCreado =await userRepository.create({nombre_completo:req.body.nombre_completo,username:req.body.username, email:req.body.email, 
+        let usuarioCreado =await userRepository.create({nombre_completo:req.body.nombre_completo,nombre_usuario:req.body.nombre_usuario, email:req.body.email, 
                         password:bcrypt.hashSync(req.body.password, parseInt(process.env.BCRYPT_ROUNDS))});
                   
         res.status(201).json({
             id: usuarioCreado.id,
-            username: usuarioCreado.username,
+            nombre_usuario: usuarioCreado.nombre_usuario,
             email: usuarioCreado.email
         });
     },

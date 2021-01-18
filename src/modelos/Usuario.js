@@ -3,7 +3,7 @@ const { Schema } = mongoose;
 
 const userSchema = new Schema({
     nombre_completo:String,
-    username:String,
+    nombre_usuario:String,
     email:String,
     password:String
 },{
@@ -13,7 +13,7 @@ const Usuario=mongoose.model('Usuario',userSchema);
 
 const usernameExists = async(username) => {
     let users=await Usuario.find({}).exec();
-    let usernames = users.map(user => user.username);
+    let usernames = users.map(user => user.nombre_usuario);
     return usernames.includes(username);
 }
 const emailExists = async(email) => {
@@ -29,13 +29,13 @@ const userRepository = {
     },
     async findByUsername(username) {
         let users=await Usuario.find({}).exec();
-        let result = users.filter(user => user.username == username);
+        let result = users.filter(user => user.nombre_usuario == username);
         return Array.isArray(result) && result.length > 0 ? result[0] : undefined;   
      },
     async create(newUser){
         const theUser=new Usuario({
             nombre_completo:newUser.nombre_completo,
-            username:newUser.username,
+            nombre_usuario:newUser.nombre_usuario,
             email:newUser.email,
             password:newUser.password
         });

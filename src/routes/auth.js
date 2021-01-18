@@ -8,7 +8,7 @@ import { password } from '../servicios/passport';
 
 const router = Router();
 router.post('/register', [
-    body('username')
+    body('nombre_usuario')
         .isLength({min: 5})
         .withMessage('La longitud mínima del nombre de usuario son 5 caracteres')
         .custom(username => {
