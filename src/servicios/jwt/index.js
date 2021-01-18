@@ -6,7 +6,7 @@ const jwtLifetime = process.env.JWT_LIFETIME;
 const jwtAlgorithm = process.env.JWT_ALGORITHM
 
 export const JwtService = {
-    
+   
     sign: (user) => jwt.sign({sub: user.id}, secret, {
                         algorithm: jwtAlgorithm,
                         expiresIn: jwtLifetime

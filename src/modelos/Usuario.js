@@ -3,7 +3,7 @@ const { Schema } = mongoose;
 
 const userSchema = new Schema({
     nombre_completo:String,
-    nombre_usuario:String,
+    username:String,
     email:String,
     password:String
 },{
@@ -34,9 +34,8 @@ const userRepository = {
      },
     async create(newUser){
         const theUser=new Usuario({
-            titulo:newUser.titulo,
             nombre_completo:newUser.nombre_completo,
-            nombre_usuario:newUser.nombre_usuario,
+            username:newUser.username,
             email:newUser.email,
             password:newUser.password
         });
