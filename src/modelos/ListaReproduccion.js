@@ -59,10 +59,16 @@ const ListaReproduccionRepository = {
     async obtenerCanciones(id){
         if (mongoose.Types.ObjectId.isValid(id)) {
             const lista = await ListaReproduccion.findById(id);
-            return lista!=null ?lista.canciones : lista;
-        }else{
-            return null;
+            if(Array.isArray(lista.canciones) && lista.canciones.length>0){
+                let canciones=[];
+                for(let i=0;i<lista.canciones.length;i++){
+                    let cancionBusqueda=await Cancion.findById(lista.canciones[i]);
+                    canciones.push(cancionBusqueda)
+                }
+                return canciones;
+            }
         }
+        return null;
     },
     async agregarCancionALista(idLista,idCancion){
         if (mongoose.Types.ObjectId.isValid(idLista) && mongoose.Types.ObjectId.isValid(idCancion)) {
@@ -71,13 +77,20 @@ const ListaReproduccionRepository = {
             if(lista!=null && cancion!=null){
                 lista.canciones.push(cancion);
                 await lista.save();
-                return lista
-            }else{
-                return null;
+                return lista;
             }
-        }else{
-            return null;
         }
+        return null;
+    },
+    async obtenerCancionLista(idLista,idCancion){
+        if(mongoose.Types.ObjectId.isValid(idLista) && mongoose.Types.ObjectId.isValid(idCancion)) {
+            const lista=await ListaReproduccion.findById(idLista);
+            const cancion=await Cancion.findById(idCancion);
+            if(lista!=null && cancion!=null){
+                aaa
+            }
+        }
+        return null;
     }
 }
 export {
