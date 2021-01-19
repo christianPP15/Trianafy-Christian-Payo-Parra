@@ -58,14 +58,10 @@ const ListaReproduccionRepository = {
     },
     async obtenerCanciones(id){
         if (mongoose.Types.ObjectId.isValid(id)) {
-            const lista = await ListaReproduccion.findById(id);
+            const lista = await ListaReproduccion.findOne({'_id':id}).populate('cancions');
+            console.log(lista);
             if(Array.isArray(lista.canciones) && lista.canciones.length>0){
-                let canciones=[];
-                for(let i=0;i<lista.canciones.length;i++){
-                    let cancionBusqueda=await Cancion.findById(lista.canciones[i]);
-                    canciones.push(cancionBusqueda)
-                }
-                return canciones;
+               return lista.canciones
             }
         }
         return null;
