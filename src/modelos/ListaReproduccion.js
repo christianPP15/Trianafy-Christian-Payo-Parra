@@ -59,7 +59,9 @@ const ListaReproduccionRepository = {
     async obtenerCanciones(id){
         if (mongoose.Types.ObjectId.isValid(id)) {
             const lista = await ListaReproduccion.findOne({_id:id}).populate('canciones');
-            return lista.canciones
+            if(lista!=null){
+                return lista.canciones
+            }
         }
         return null;
     },
@@ -77,15 +79,34 @@ const ListaReproduccionRepository = {
     },
     async obtenerCancionLista(idLista,idCancion){
         if(mongoose.Types.ObjectId.isValid(idLista) && mongoose.Types.ObjectId.isValid(idCancion)) {
-            const lista=await ListaReproduccion.findById(idLista);
-            console.log(lista);
+            const lista = await ListaReproduccion.findOne({_id:idLista}).populate('canciones');
+            if(lista!=null){
+                return lista.canciones.filter(cancion => cancion._id == idCancion);;
+            }
+        }
+        return null;
+    },
+    async eliminarCancionLista(idLista,idCancion){  
+        if(mongoose.Types.ObjectId.isValid(idLista) && mongoose.Types.ObjectId.isValid(idCancion)) {
+            let lista=await ListaReproduccion.findOne({_id:idLista}).populate('canciones');
+            let cancion=await Cancion.findById(idCancion);
             if(lista!=null && cancion!=null){
-                
+                let indiceBorrar=undefined;
+                //Voy ha hacer una especie de indexOf para obtener el indice de una canción en la lista de canciones de una playlist
+                for(let i=0;i<lista.canciones.length;i++){
+                    if(lista.canciones[i]._id=idCancion){
+                        indiceBorrar=i;
+                    }
+                }
+                lista.canciones.splice(indiceBorrar,1);
+                await lista.save();
+                return lista;
             }
         }
         return null;
     }
 }
+
 export {
     ListaReproduccion,
     ListaReproduccionRepository

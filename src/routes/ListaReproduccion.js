@@ -10,4 +10,6 @@ router.delete('/:id',token(),ListaReproduccionController.eliminarListaReproducci
 router.put('/:id',token(),ListaReproduccionController.actualizarList);
 router.get('/:id/songs',token(),ListaReproduccionController.obtenerCancionesDeUnaLista);
 router.post('/:idLista/songs/:idCancion',token(),ListaReproduccionController.agregarCancionAListaDeReproduccion);
+router.get('/:idLista/songs/:idCancion',token(),ListaReproduccionController.obtenerCancionDeUnaLista);
+router.delete('/:idLista/songs/:idCancion',token(),ListaReproduccionController.eliminarCancionDeUnaLista);
 export default router;

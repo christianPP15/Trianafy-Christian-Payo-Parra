@@ -51,6 +51,14 @@ const ListaReproduccionController = {
     agregarCancionAListaDeReproduccion:async(req,res)=>{
         let agregado=await ListaReproduccionRepository.agregarCancionALista(req.params.idLista,req.params.idCancion);
         agregado!=null ? res.json(agregado) : res.sendStatus(404);
+    },
+    obtenerCancionDeUnaLista:async(req,res)=>{
+        let cancion=await ListaReproduccionRepository.obtenerCancionLista(req.params.idLista,req.params.idCancion);
+        cancion!=null ? res.json(cancion) : res.sendStatus(404);
+    },
+    eliminarCancionDeUnaLista:async(req,res)=>{
+        let resul=await ListaReproduccionRepository.eliminarCancionLista(req.params.idLista,req.params.idCancion);
+        resul!=null ? res.sendStatus(204) : res.sendStatus(404);
     }
 
 }
