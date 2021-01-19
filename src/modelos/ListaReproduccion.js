@@ -58,11 +58,8 @@ const ListaReproduccionRepository = {
     },
     async obtenerCanciones(id){
         if (mongoose.Types.ObjectId.isValid(id)) {
-            const lista = await ListaReproduccion.findOne({'_id':id}).populate('cancions');
-            console.log(lista);
-            if(Array.isArray(lista.canciones) && lista.canciones.length>0){
-               return lista.canciones
-            }
+            const lista = await ListaReproduccion.findOne({_id:id}).populate('canciones');
+            return lista.canciones
         }
         return null;
     },
@@ -81,9 +78,9 @@ const ListaReproduccionRepository = {
     async obtenerCancionLista(idLista,idCancion){
         if(mongoose.Types.ObjectId.isValid(idLista) && mongoose.Types.ObjectId.isValid(idCancion)) {
             const lista=await ListaReproduccion.findById(idLista);
-            const cancion=await Cancion.findById(idCancion);
+            console.log(lista);
             if(lista!=null && cancion!=null){
-                aaa
+                
             }
         }
         return null;
