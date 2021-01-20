@@ -1,5 +1,6 @@
 import { ListaReproduccion, ListaReproduccionRepository } from '../modelos/ListaReproduccion';
 import mongoose from 'mongoose';
+import { param } from 'express-validator';
 const ListaReproduccionController = {
     todasLasListas: async (req, res) => {
         const data = await ListaReproduccionRepository.findAll(req.user.id);
@@ -30,33 +31,46 @@ const ListaReproduccionController = {
     },
     actualizarList: async (req, res) => {
         if (req.params.id != undefined && mongoose.Types.ObjectId.isValid(req.params.id)) {
-            let listaModificada = await ListaReproduccionRepository.actualizarList(req.params.id, {
-                name: req.body.name,
-                descripcion: req.body.descripcion
-            });
+            let listaModificada;
+            if(req.body.name!=undefined && req.body.descripcion!=undefined){
+                listaModificada= await ListaReproduccionRepository.actualizarList(req.params.id, {
+                    name: req.body.name,
+                    descripcion: req.body.descripcion
+                },req.user.id);
+            }else if(req.body.name==undefined){
+                listaModificada= await ListaReproduccionRepository.actualizarList(req.params.id, {
+                    descripcion: req.body.descripcion
+                },req.user.id);
+            }else if(req.body.descripcion==undefined){
+                listaModificada= await ListaReproduccionRepository.actualizarList(req.params.id, {
+                    name: req.body.name
+                },req.user.id);
+            }else{
+                res.sendStatus(404);
+            }
             if (listaModificada == undefined) {
                 res.sendStatus(404);
             } else {
                 res.sendStatus(204);
             }
         } else {
-            res.sendStatus(409);
+            res.sendStatus(400);
         }
     },
     obtenerCancionesDeUnaLista:async(req,res)=>{
-        let canciones= await ListaReproduccionRepository.obtenerCanciones(req.params.id);
+        let canciones= await ListaReproduccionRepository.obtenerCanciones(req.params.id,req.user.id);
         canciones!=null ? res.json(canciones) : res.json([]);
     },
     agregarCancionAListaDeReproduccion:async(req,res)=>{
-        let agregado=await ListaReproduccionRepository.agregarCancionALista(req.params.idLista,req.params.idCancion);
+        let agregado=await ListaReproduccionRepository.agregarCancionALista(req.params.idLista,req.params.idCancion,req.user.id);
         agregado!=null ? res.json(agregado) : res.sendStatus(404);
     },
     obtenerCancionDeUnaLista:async(req,res)=>{
-        let cancion=await ListaReproduccionRepository.obtenerCancionLista(req.params.idLista,req.params.idCancion);
+        let cancion=await ListaReproduccionRepository.obtenerCancionLista(req.params.idLista,req.params.idCancion,req.user.id);
         cancion!=null ? res.json(cancion) : res.sendStatus(404);
     },
     eliminarCancionDeUnaLista:async(req,res)=>{
-        let resul=await ListaReproduccionRepository.eliminarCancionLista(req.params.idLista,req.params.idCancion);
+        let resul=await ListaReproduccionRepository.eliminarCancionLista(req.params.idLista,req.params.idCancion,req.user.id);
         resul!=null ? res.sendStatus(204) : res.sendStatus(404);
     }
 

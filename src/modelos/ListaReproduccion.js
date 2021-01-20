@@ -48,26 +48,26 @@ const ListaReproduccionRepository = {
             return null;
         }
     },
-    async actualizarList(id, listaActualizada) {
-        const listaEditada = await ListaReproduccion.findById(id);
+    async actualizarList(id, listaActualizada,idUsuario) {
+        const listaEditada = await ListaReproduccion.findOne({_id:id,usuario_id:idUsuario});
         if (listaEditada != null) {
             return await Object.assign(listaEditada, listaActualizada).save();
         } else {
             return undefined;
         }
     },
-    async obtenerCanciones(id){
+    async obtenerCanciones(id,idUsuario){
         if (mongoose.Types.ObjectId.isValid(id)) {
-            const lista = await ListaReproduccion.findOne({_id:id}).populate('canciones');
+            const lista = await ListaReproduccion.findOne({_id:id,usuario_id:idUsuario}).populate('canciones');
             if(lista!=null){
                 return lista.canciones
             }
         }
         return null;
     },
-    async agregarCancionALista(idLista,idCancion){
+    async agregarCancionALista(idLista,idCancion,idUsuario){
         if (mongoose.Types.ObjectId.isValid(idLista) && mongoose.Types.ObjectId.isValid(idCancion)) {
-            const lista=await ListaReproduccion.findById(idLista);
+            const lista=await ListaReproduccion.findOne({_id:idLista,usuario_id:idUsuario});
             const cancion=await Cancion.findById(idCancion);
             if(lista!=null && cancion!=null){
                 lista.canciones.push(cancion);
@@ -77,18 +77,18 @@ const ListaReproduccionRepository = {
         }
         return null;
     },
-    async obtenerCancionLista(idLista,idCancion){
+    async obtenerCancionLista(idLista,idCancion,idUsuario){
         if(mongoose.Types.ObjectId.isValid(idLista) && mongoose.Types.ObjectId.isValid(idCancion)) {
-            const lista = await ListaReproduccion.findOne({_id:idLista}).populate('canciones');
+            const lista = await ListaReproduccion.findOne({_id:idLista,usuario_id:idUsuario}).populate('canciones');
             if(lista!=null){
                 return lista.canciones.filter(cancion => cancion._id == idCancion);;
             }
         }
         return null;
     },
-    async eliminarCancionLista(idLista,idCancion){  
+    async eliminarCancionLista(idLista,idCancion,idUsuario){  
         if(mongoose.Types.ObjectId.isValid(idLista) && mongoose.Types.ObjectId.isValid(idCancion)) {
-            let lista=await ListaReproduccion.findOne({_id:idLista}).populate('canciones');
+            let lista=await ListaReproduccion.findOne({_id:idLista,usuario_id:idUsuario}).populate('canciones');
             let cancion=await Cancion.findById(idCancion);
             if(lista!=null && cancion!=null){
                 let indiceBorrar=undefined;
