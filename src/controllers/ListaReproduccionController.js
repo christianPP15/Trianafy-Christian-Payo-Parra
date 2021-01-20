@@ -2,7 +2,7 @@ import { ListaReproduccion, ListaReproduccionRepository } from '../modelos/Lista
 import mongoose from 'mongoose';
 const ListaReproduccionController = {
     todasLasListas: async (req, res) => {
-        const data = await ListaReproduccionRepository.findAll();
+        const data = await ListaReproduccionRepository.findAll(req.user.id);
         if (Array.isArray(data) && data.length > 0)
             res.json(data);
         else

@@ -12,21 +12,22 @@ const userSchema = new Schema({
 const Usuario=mongoose.model('Usuario',userSchema);
 
 const usernameExists = async(username) => {
-    let users=await Usuario.find({nombre_usuario:username});
-    return Object.keys(users).length === 0 ? false : true;
+    let users=await Usuario.findOne({nombre_usuario:username});
+    
+    return users==null ? false : true;
 }
 const emailExists = async(email) => {
-    let users=await Usuario.find({email:email});
-    return Object.keys(users).length === 0 ? false : true;
+    let users=await Usuario.findOne({email:email});
+    return users==null ? false : true;
 }
 const userRepository = {
     async findByEmail(email) {
-        let users=await Usuario.find({email:email});
-       return Object.keys(users).length === 0 ? undefined : users;   
+        let users=await Usuario.findOne({email:email});
+       return users==null ? undefined : users;   
     },
     async findByUsername(username) {
-        let users=await Usuario.find({nombre_usuario:username});
-        return Object.keys(users).length === 0 ? undefined : users;     
+        let users=await Usuario.findOne({nombre_usuario:username});
+        return users==null ? undefined : users;     
      },
     async create(newUser){
         const theUser=new Usuario({

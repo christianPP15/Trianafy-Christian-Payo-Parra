@@ -25,8 +25,6 @@ passport.use(new LocalStrategy({
 
 }));
 
-
-
 const opts = {
     jwtFromRequest : ExtractJwt.fromAuthHeaderAsBearerToken(),
     secretOrKey : process.env.JWT_SECRET,

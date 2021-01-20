@@ -20,8 +20,8 @@ const listaReproduccionSchema = new Schema({
 
 const ListaReproduccion = mongoose.model('ListaReproduccion', listaReproduccionSchema);
 const ListaReproduccionRepository = {
-    async findAll() {
-        const result = await ListaReproduccion.find({}).exec();
+    async findAll(idUsuario) {
+        const result = await ListaReproduccion.find({usuario_id:idUsuario}).populate('canciones');
         return result;
     },
     async findDescription(id) {
