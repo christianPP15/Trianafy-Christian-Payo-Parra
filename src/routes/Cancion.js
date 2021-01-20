@@ -14,7 +14,6 @@ router.post('/',[
     body('id').not().exists().withMessage('No es necesario que proporcione un ID; este se asignará automáticamente')
 ],validar,CancionesController.agregarCancion);
 router.get('/:id',token(),CancionesController.buscarPorId);
-router.delete('/:id',[token(),param('id').isMongoId().withMessage("No es un id válido")],CancionesController.eliminarPorId);
-router.put('/:id',[token(),
-param('id').isMongoId().withMessage("No es un id válido")],CancionesController.editarCancion);
+router.delete('/:id',token(),CancionesController.eliminarPorId);
+router.put('/:id',[token(),body('id').not().exists().withMessage("No se puede modificar el id")],CancionesController.editarCancion);
 export default router;
