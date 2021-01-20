@@ -9,7 +9,7 @@ const ListaReproduccionController = {
             res.sendStatus(404);
     },
     obtenerDescripcionPorId: async (req, res) => {
-        const datos = await ListaReproduccionRepository.findDescription(req.params.id);
+        const datos = await ListaReproduccionRepository.findDescription(req.params.id,req.user.id);
         if (datos != null) {
             res.send(datos.descripcion);
         } else {
@@ -25,8 +25,7 @@ const ListaReproduccionController = {
         res.json(listaNueva);
     },
     eliminarListaReproduccion: async (req, res) => {
-        let resul = await ListaReproduccionRepository.deleteList(req.params.id);
-        console.log(resul);
+        let resul = await ListaReproduccionRepository.deleteList(req.params.id, req.user.id);
         resul != null ? res.sendStatus(204) : res.sendStatus(404)
     },
     actualizarList: async (req, res) => {

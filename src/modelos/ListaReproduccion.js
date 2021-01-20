@@ -24,9 +24,9 @@ const ListaReproduccionRepository = {
         const result = await ListaReproduccion.find({usuario_id:idUsuario}).populate('canciones');
         return result;
     },
-    async findDescription(id) {
+    async findDescription(id,idUsuario) {
         if (mongoose.Types.ObjectId.isValid(id)) {
-            const result = await ListaReproduccion.findById(id).exec()
+            const result = await ListaReproduccion.findOne({_id:id,usuario_id:idUsuario});
             return result;
         } else {
             return null;
@@ -41,9 +41,9 @@ const ListaReproduccionRepository = {
         const result = await thelist.save();
         return result;
     },
-    async deleteList(id) {
+    async deleteList(id,idUsuario) {
         if (mongoose.Types.ObjectId.isValid(id)) {
-            return await ListaReproduccion.findByIdAndRemove(id).exec();
+            return await ListaReproduccion.deleteOne({_id:id,usuario_id:idUsuario})
         } else {
             return null;
         }
