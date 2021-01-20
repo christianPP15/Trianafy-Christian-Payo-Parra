@@ -17,6 +17,7 @@ passport.use(new LocalStrategy({
         return done(null, false); 
     else
         return done(null, {
+            id:user.id,
             nombre_completo:user.nombre_completo,
             nombre_usuario:user.nombre_usuario,
             email:user.email
@@ -32,10 +33,9 @@ const opts = {
     algorithms : [process.env.JWT_ALGORITHM]
 };
 
-passport.use('token', new JwtStrategy(opts,(jwt_payload, done)=>{
+passport.use('token', new JwtStrategy(opts,async(jwt_payload, done)=>{
     const user_id = jwt_payload.sub;
-    
-    const user = userRepository.findById(user_id);
+    const user =await userRepository.findById(user_id);
     if (user == undefined)
         return done(null, false); 
     else
@@ -43,27 +43,26 @@ passport.use('token', new JwtStrategy(opts,(jwt_payload, done)=>{
 
 }));
 
-export const password = () =>async(req, res, next) =>
-    await passport.authenticate('local', {session: false}, async(err, user, info) => {
-        
+export const password = () =>(req, res, next) =>
+     passport.authenticate('local', {session: false}, async(err, user, info) => {
         if (err)
             return res.status(400).json(err)
         else if (err || !user)
             return res.status(401).end()
 
-        await req.logIn(user, { session: false }, (err) => {
+        req.logIn(user, { session: false }, (err) => {
             if (err) return res.status(401).end()
             next()
         })
     })(req, res, next);
 
 
-export const token = () => async (req, res, next) =>
-    await passport.authenticate('token', { session: false },async(err, user, info) => {
+export const token = () =>  (req, res, next) =>
+     passport.authenticate('token', { session: false },async(err, user, info) => {
     if (err ||  !user) {
         return res.status(401).end()
     }
-    await req.logIn(user, { session: false }, (err) => {
+     req.logIn(user, { session: false }, (err) => {
         if (err) return res.status(401).end()
         next()
     })
