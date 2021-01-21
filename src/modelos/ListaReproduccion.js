@@ -45,8 +45,13 @@ const ListaReproduccionRepository = {
             descripcion: newList.descripcion,
             usuario_id: newList.usuario_id
         });
-        const result = await thelist.save();
-        return result;
+        try{
+            const result = await thelist.save();
+            return result;
+        }catch(err){
+            return err;
+        }
+        
     },
     async deleteList(id,idUsuario) {
         if (mongoose.Types.ObjectId.isValid(id)) {

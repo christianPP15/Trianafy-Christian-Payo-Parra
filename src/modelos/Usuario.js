@@ -51,7 +51,7 @@ const userRepository = {
                 email: result.email,
             };
         } catch (err) {
-            return err;
+            return {message: (err.name === 'MongoError' && err.code === 11000) ? 'Email o usuario en uso, intentelo de nuevo' : errorHandler.getErrorMessage(err)}
         }
     },
     async findById(id) {
