@@ -2,10 +2,23 @@ import mongoose from 'mongoose';
 const { Schema } = mongoose;
 
 const cancionSchema = new Schema({
-    titulo: String,
-    nombre_artista: String,
-    album: String,
-    anio: Number
+    titulo: {
+        type:String,
+        required:"Es necesario indicar el título de la canción"
+    },
+    nombre_artista: {
+        type:String,
+        required:"Es necesario especificar el nombre del artista o grupo",
+        maxlength:[100,"El nombre proporcionado para el artista es demasiado largo"]
+    },
+    album: {
+        type:String,
+        required:"Es necesario especificar el album al que pertene"
+    },
+    anio: {
+        type:Number,
+        required:"Es necesario especificar el año en el que fue publicado"
+    }
 }, {
     versionKey: false
 });
@@ -23,8 +36,12 @@ const CancionRepository = {
             album: newSong.album,
             anio: newSong.anio
         });
-        const result = await theSong.save();
-        return result;
+        try{
+            const result = await theSong.save();
+            return result;
+        }catch(err){
+            return err;
+        }
     },
     async findById(id) {
         if (mongoose.Types.ObjectId.isValid(id)) {

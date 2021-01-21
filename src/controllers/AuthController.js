@@ -11,11 +11,7 @@ const AuthController = {
         let usuarioCreado =await userRepository.create({nombre_completo:req.body.nombre_completo,nombre_usuario:req.body.nombre_usuario, email:req.body.email, 
                         password:bcrypt.hashSync(req.body.password, parseInt(process.env.BCRYPT_ROUNDS))});
                   
-        res.status(201).json({
-            id: usuarioCreado.id,
-            nombre_usuario: usuarioCreado.nombre_usuario,
-            email: usuarioCreado.email
-        });
+        res.status(201).json(usuarioCreado);
     },
     login: async(req, res, next) => {
         

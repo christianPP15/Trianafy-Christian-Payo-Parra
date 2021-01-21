@@ -4,8 +4,15 @@ import { Cancion } from './Cancion';
 const { Schema } = mongoose;
 
 const listaReproduccionSchema = new Schema({
-    name: String,
-    descripcion: String,
+    name: {
+        type:String,
+        required:"Es necesario un nombre para la playlist",
+        maxlength:[20,"Nombre demasiado largo"]
+    },
+    descripcion: {
+        type:String,
+        maxlength:[250,"Descripción demasiada larga"]
+    },
     usuario_id: {
         type: mongoose.ObjectId,
         ref: 'Usuario'
