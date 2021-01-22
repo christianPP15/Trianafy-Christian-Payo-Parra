@@ -7,7 +7,7 @@ const listaReproduccionSchema = new Schema({
     name: {
         type:String,
         required:"Es necesario un nombre para la playlist",
-        maxlength:[20,"Nombre demasiado largo"]
+        maxlength:[60,"Nombre demasiado largo"]
     },
     descripcion: {
         type:String,
@@ -31,9 +31,9 @@ const ListaReproduccionRepository = {
         const result = await ListaReproduccion.find({usuario_id:idUsuario}).populate('canciones');
         return result;
     },
-    async findDescription(id,idUsuario) {
+    findDescription(id,idUsuario) {
         if (mongoose.Types.ObjectId.isValid(id)) {
-            const result = await ListaReproduccion.findOne({_id:id,usuario_id:idUsuario});
+            const result = ListaReproduccion.findOne({_id:id,usuario_id:idUsuario});
             return result;
         } else {
             return null;
@@ -42,14 +42,14 @@ const ListaReproduccionRepository = {
     async create(newList) {
         const thelist = new ListaReproduccion({
             name: newList.name,
-            descripcion: newList.descripcion,
+            descripcion: newList.descripcion!= undefined ? newList.descripcion : "",
             usuario_id: newList.usuario_id
         });
         try{
-            const result = await thelist.save();
+            let result=await thelist.save();
             return result;
         }catch(err){
-            return err;
+            console.log(err);
         }
         
     },
@@ -63,7 +63,9 @@ const ListaReproduccionRepository = {
     async actualizarList(id, listaActualizada,idUsuario) {
         const listaEditada = await ListaReproduccion.findOne({_id:id,usuario_id:idUsuario});
         if (listaEditada != null) {
-            return await Object.assign(listaEditada, listaActualizada).save();
+            if(listaActualizada.descripcion!=undefined)  listaEditada.descripcion=listaActualizada.descripcion;
+            if(listaActualizada.name!=undefined)  listaEditada.name=listaActualizada.name ;
+            return await listaEditada.save();
         } else {
             return undefined;
         }
