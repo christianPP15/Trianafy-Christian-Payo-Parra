@@ -18,16 +18,20 @@ const ListaReproduccionController = {
         }
     },
     agregarLista: async (req, res) => {
-        let listaNueva = await ListaReproduccionRepository.create({
-            name: req.body.name,
-            descripcion: req.body.descripcion,
-            usuario_id: req.user.id
-        });
-        res.json(listaNueva).sendStatus(201);
+        try{
+            let listaNueva = await ListaReproduccionRepository.create({
+                name: req.body.name,
+                descripcion: req.body.descripcion,
+                usuario_id: req.user.id
+            });
+            res.status(201).json(listaNueva);
+        }catch(error){
+            res.status(400).json({Error:`Se ha producido un error con su peticion :${error.message}`})
+        }   
     },
     eliminarListaReproduccion: async (req, res) => {
         let resul = await ListaReproduccionRepository.deleteList(req.params.id, req.user.id);
-        resul != null ? res.sendStatus(204) : res.sendStatus(404)
+        resul.deletedCount>0 ? res.sendStatus(204) : res.sendStatus(404)
     },
     actualizarList: async (req, res) => {
         if (req.params.id != undefined && mongoose.Types.ObjectId.isValid(req.params.id)) {

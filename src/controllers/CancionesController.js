@@ -6,13 +6,17 @@ const CancionesController={
         res.json(data);
     },
     agregarCancion:async(req,res)=>{
-        let cancionCreada= await CancionRepository.create({
-            titulo:req.body.titulo,
-            nombre_artista:req.body.nombre_artista,
-            album:req.body.album,
-            anio:req.body.anio
-        });
-        res.json(cancionCreada);
+        try{
+            let cancionCreada= await CancionRepository.create({
+                titulo:req.body.titulo,
+                nombre_artista:req.body.nombre_artista,
+                album:req.body.album,
+                anio:req.body.anio
+            });
+            res.status(201).json(cancionCreada);
+        }catch(error){
+            res.status(400).json({Error:`Se ha producido un error con su peticion :${error.message}`})
+        }
     },
     buscarPorId:async(req,res)=>{
         let song = await CancionRepository.findById(req.params.id);
