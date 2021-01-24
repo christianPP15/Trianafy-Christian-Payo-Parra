@@ -2,9 +2,9 @@ import mongoose from 'mongoose';
 const { Schema } = mongoose;
 
 const userSchema = new Schema({
-    nombre_completo: {
-        type: String,
-        required: "Especifique su nombre completo"
+    nombre_completo:{
+        type:String,
+        required:"Especifique su nombre y apellidos"
     },
     nombre_usuario: {
         unique: true,
@@ -42,7 +42,7 @@ const userRepository = {
             email: newUser.email,
             password: newUser.password
         });
-        try {
+        
             const result = await theUser.save();
             return {
                 id: result.id,
@@ -50,9 +50,7 @@ const userRepository = {
                 nombre_usuario: result.nombre_usuario,
                 email: result.email,
             };
-        } catch (err) {
-            return {message: (err.name === 'MongoError' && err.code === 11000) ? 'Email o usuario en uso, intentelo de nuevo' : errorHandler.getErrorMessage(err)}
-        }
+        
     },
     async findById(id) {
         const result = await Usuario.findById(id);
