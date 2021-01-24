@@ -15,13 +15,11 @@ const cancionSchema = new Schema(
         "El nombre proporcionado para el artista es demasiado largo",
       ],
     },
-    album: {
-      type: String,
-      required: "Es necesario especificar el album al que pertene",
-    },
+    album: String,
     anio: {
       type: Number,
-      required: "Es necesario especificar el año en el que fue publicado",
+      min:[0, "El año debe ser mayor al año 0"],
+      max:[2030,"El año debe ser menor a 2030"]
     },
   },
   {
@@ -39,8 +37,8 @@ const CancionRepository = {
     const theSong = new Cancion({
       titulo: newSong.titulo,
       nombre_artista: newSong.nombre_artista,
-      album: newSong.album,
-      anio: newSong.anio,
+      album: newSong.album!=undefined ? newSong.album : "",
+      anio: newSong.anio != undefined ? newSong.anio : 0,
     });
     return await theSong.save();
   },
@@ -63,7 +61,12 @@ const CancionRepository = {
     if (mongoose.Types.ObjectId.isValid(id)) {
       const cancionEditada = await Cancion.findById(id);
       if (cancionEditada != null) {
-        return await Object.assign(cancionEditada, modifySong).save();
+        if(modifySong.titulo) cancionEditada.titulo=modifySong.titulo;
+        if(modifySong.nombre_artista) cancionEditada.nombre_artista=modifySong.nombre_artista;
+        if(modifySong.album) cancionEditada.album=modifySong.album;
+        if(modifySong.anio) cancionEditada.anio=modifySong.anio;
+        //Esta parte del código no me gusta hacerla así pero el Object.assign no me funcionaba los objetos solo se quedaba con el nuevo
+        return await cancionEditada.save();
       } else {
         return undefined;
       }

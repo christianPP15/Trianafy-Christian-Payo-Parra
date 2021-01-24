@@ -58,7 +58,7 @@ const ListaReproduccionRepository = {
       descripcion: newList.descripcion != undefined ? newList.descripcion : "",
       usuario_id: newList.usuario_id,
     });
-    return  await thelist.save();
+    return await thelist.save();
   },
   async deleteList(id, idUsuario) {
     if (mongoose.Types.ObjectId.isValid(id)) {
@@ -105,12 +105,16 @@ const ListaReproduccionRepository = {
       const lista = await ListaReproduccion.findOne({
         _id: idLista,
         usuario_id: idUsuario,
-      });
+      }).populate("canciones");
       const cancion = await Cancion.findById(idCancion);
       if (lista != null && cancion != null) {
-        lista.canciones.push(cancion);
-        await lista.save();
-        return lista;
+        let existe=lista.canciones.filter(song=>song.equals(cancion));
+        //Buscamos si la canción ya está agregada de ser así devuelve un 404
+        if(existe.length==0){
+          lista.canciones.push(cancion);
+          await lista.save();
+          return lista;
+        }
       }
     }
     return null;
@@ -123,9 +127,14 @@ const ListaReproduccionRepository = {
       const lista = await ListaReproduccion.findOne({
         _id: idLista,
         usuario_id: idUsuario,
-      }).populate("canciones");
-      if (lista != null) {
-        return lista.canciones.filter((cancion) => cancion._id == idCancion);
+      }).populate({
+        path: "canciones",
+        match: {
+          _id: idCancion,
+        },
+      });
+      if (lista != null && lista.canciones.length > 0) {
+        return lista.canciones[0];
       }
     }
     return null;

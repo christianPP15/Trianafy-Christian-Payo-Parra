@@ -50,7 +50,7 @@ const ListaReproduccionController = {
     },
     obtenerCancionesDeUnaLista: async (req, res) => {
         let canciones = await ListaReproduccionRepository.obtenerCanciones(req.params.id, req.user.id);
-        canciones != null ? res.json(canciones) : res.json([]);
+        canciones != null ? res.json(canciones) : res.status(404).json({Error:"No se ha encontrado la lista de reproducción solicitada"});
     },
     agregarCancionAListaDeReproduccion: async (req, res) => {
         let agregado = await ListaReproduccionRepository.agregarCancionALista(req.params.idLista, req.params.idCancion, req.user.id);
