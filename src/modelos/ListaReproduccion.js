@@ -38,7 +38,7 @@ const ListaReproduccionRepository = {
   async findAll(idUsuario) {
     const result = await ListaReproduccion.find({
       usuario_id: idUsuario,
-    }).populate("canciones");
+    }).populate("canciones").exec();
     return result;
   },
   findDescription(id, idUsuario) {
@@ -46,7 +46,7 @@ const ListaReproduccionRepository = {
       const result = ListaReproduccion.findOne({
         _id: id,
         usuario_id: idUsuario,
-      });
+      }).exec();
       return result;
     } else {
       return null;
@@ -65,7 +65,7 @@ const ListaReproduccionRepository = {
       return await ListaReproduccion.deleteOne({
         _id: id,
         usuario_id: idUsuario,
-      });
+      }).exec();
     } else {
       return null;
     }
@@ -74,7 +74,7 @@ const ListaReproduccionRepository = {
     const listaEditada = await ListaReproduccion.findOne({
       _id: id,
       usuario_id: idUsuario,
-    });
+    }).exec();
     if (listaEditada != null) {
       if (listaActualizada.descripcion != undefined)
         listaEditada.descripcion = listaActualizada.descripcion;
@@ -90,7 +90,7 @@ const ListaReproduccionRepository = {
       const lista = await ListaReproduccion.findOne({
         _id: id,
         usuario_id: idUsuario,
-      }).populate("canciones");
+      }).populate("canciones").exec();
       if (lista != null) {
         return lista.canciones;
       }
@@ -105,7 +105,7 @@ const ListaReproduccionRepository = {
       const lista = await ListaReproduccion.findOne({
         _id: idLista,
         usuario_id: idUsuario,
-      }).populate("canciones");
+      }).populate("canciones").exec();
       const cancion = await Cancion.findById(idCancion);
       if (lista != null && cancion != null) {
         let existe=lista.canciones.filter(song=>song.equals(cancion));
@@ -132,7 +132,7 @@ const ListaReproduccionRepository = {
         match: {
           _id: idCancion,
         },
-      });
+      }).exec();
       if (lista != null && lista.canciones.length > 0) {
         return lista.canciones[0];
       }
@@ -147,8 +147,8 @@ const ListaReproduccionRepository = {
       let lista = await ListaReproduccion.findOne({
         _id: idLista,
         usuario_id: idUsuario,
-      }).populate("canciones");
-      let cancion = await Cancion.findById(idCancion);
+      }).populate("canciones").exec();
+      let cancion = await Cancion.findById(idCancion).exec();
       if (lista != null && cancion != null) {
         let indiceBorrar = undefined;
         //Voy ha hacer una especie de indexOf para obtener el indice de una canción en la lista de canciones de una playlist

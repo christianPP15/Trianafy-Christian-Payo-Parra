@@ -3,12 +3,15 @@ import bodyParser from 'body-parser';
 import cors from "cors";
 import express from 'express';
 import mongoose from "mongoose";
+import morgan from "morgan";
+import morganBody from "morgan-body";
 import routes from './routes';
 const app = express();
 app.use(cors());
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
-
+app.use(morgan('dev'))
+morganBody(app);
 app.use('/list',routes.ListaReproduccion);
 app.use('/songs',routes.Cancion);
 app.use('/auth', routes.auth);

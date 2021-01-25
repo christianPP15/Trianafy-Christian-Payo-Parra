@@ -28,11 +28,11 @@ const Usuario = mongoose.model('Usuario', userSchema);
 
 const userRepository = {
     async findByEmail(email) {
-        let users = await Usuario.findOne({ email: email });
+        let users = await Usuario.findOne({ email: email }).exec();
         return users == null ? undefined : users;
     },
     async findByUsername(username) {
-        let users = await Usuario.findOne({ nombre_usuario: username });
+        let users = await Usuario.findOne({ nombre_usuario: username }).exec();
         return users == null ? undefined : users;
     },
     async create(newUser) {
@@ -53,7 +53,7 @@ const userRepository = {
         
     },
     async findById(id) {
-        const result = await Usuario.findById(id);
+        const result = await Usuario.findById(id).exec();
         return result == null ? undefined : result;
     }
 

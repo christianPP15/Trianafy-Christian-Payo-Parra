@@ -44,7 +44,7 @@ const CancionRepository = {
   },
   async findById(id) {
     if (mongoose.Types.ObjectId.isValid(id)) {
-      const result = await Cancion.findById(id);
+      const result = await Cancion.findById(id).exec();
       return result != null ? result : undefined;
     } else {
       return undefined;
@@ -59,7 +59,7 @@ const CancionRepository = {
   },
   async editSong(id, modifySong) {
     if (mongoose.Types.ObjectId.isValid(id)) {
-      const cancionEditada = await Cancion.findById(id);
+      const cancionEditada = await Cancion.findById(id).exec();
       if (cancionEditada != null) {
         if(modifySong.titulo) cancionEditada.titulo=modifySong.titulo;
         if(modifySong.nombre_artista) cancionEditada.nombre_artista=modifySong.nombre_artista;
