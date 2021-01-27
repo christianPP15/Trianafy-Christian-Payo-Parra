@@ -72,12 +72,7 @@ const CancionRepository = {
     if (mongoose.Types.ObjectId.isValid(id)) {
       const cancionEditada = await Cancion.findById(id).exec();
       if (cancionEditada != null) {
-        if(modifySong.titulo) cancionEditada.titulo=modifySong.titulo;
-        if(modifySong.nombre_artista) cancionEditada.nombre_artista=modifySong.nombre_artista;
-        if(modifySong.album) cancionEditada.album=modifySong.album;
-        if(modifySong.anio) cancionEditada.anio=modifySong.anio;
-        //Esta parte del código no me gusta hacerla así pero el Object.assign no me funcionaba los objetos solo se quedaba con el nuevo
-        return await cancionEditada.save();
+        return await Object.assign(cancionEditada, modifySong).save();
       } else {
         return undefined;
       }

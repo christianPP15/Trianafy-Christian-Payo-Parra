@@ -76,11 +76,9 @@ const ListaReproduccionRepository = {
       usuario_id: idUsuario,
     }).exec();
     if (listaEditada != null) {
-      if (listaActualizada.descripcion != undefined)
-        listaEditada.descripcion = listaActualizada.descripcion;
-      if (listaActualizada.name != undefined)
-        listaEditada.name = listaActualizada.name;
-      return await listaEditada.save();
+      console.log(listaActualizada);
+      console.log(listaEditada);
+      return await Object.assign(listaEditada,listaActualizada).save();
     } else {
       return undefined;
     }
