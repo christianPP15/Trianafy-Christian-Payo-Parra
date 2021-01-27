@@ -1,4 +1,5 @@
 import mongoose from "mongoose";
+import { ListaReproduccion } from "./ListaReproduccion";
 const { Schema } = mongoose;
 
 const cancionSchema = new Schema(
@@ -18,7 +19,8 @@ const cancionSchema = new Schema(
     album: String,
     anio: {
       type: Number,
-      min:[0, "El año debe ser mayor al año 0"],
+      required:"Debe anotar el año dónde fue publicada",
+      min:[1930, "El año debe ser mayor a 1930"],
       max:[2030,"El año debe ser menor a 2030"]
     },
   },
@@ -52,6 +54,15 @@ const CancionRepository = {
   },
   async deleteSong(id) {
     if (mongoose.Types.ObjectId.isValid(id)) {
+      let listas=await ListaReproduccion.find({canciones:{$in:[id]}}).exec();
+      for(let i=0;i<listas.length;i++){
+        for(let j=0;j<listas[i].canciones.length;j++){
+          if(listas[i].canciones[j]==id){
+            listas[i].canciones.splice(j,1);
+            await listas[i].save();
+          }
+        }
+      }
       return await Cancion.findByIdAndRemove(id).exec();
     } else {
       return undefined;
