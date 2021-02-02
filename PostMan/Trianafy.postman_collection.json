@@ -1,0 +1,638 @@
+{
+	"info": {
+		"_postman_id": "f1804c45-e2a4-4d6b-b6cd-31f88809f22f",
+		"name": "Trianafy",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Canciones",
+			"item": [
+				{
+					"name": "http://localhost:3000/songs/",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{API_KEY}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"titulo\":\"La ultima canción\",\r\n    \"nombre_artista\":\"Rels B\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3000/songs/",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"songs",
+								""
+							]
+						},
+						"description": "Obtener todas las canciones"
+					},
+					"response": []
+				},
+				{
+					"name": "http://localhost:3000/songs/",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{API_KEY}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"titulo\":\"Rolling in the Deep\",\r\n    \"nombre_artista\":\"Adele\",\r\n    \"anio\":2011,\r\n    \"album\":\"21\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3000/songs/",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"songs",
+								""
+							]
+						},
+						"description": "Crear canción"
+					},
+					"response": []
+				},
+				{
+					"name": "http://localhost:3000/songs/:id",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{API_KEY}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"titulo\":\"Canción editada\",\r\n    \"anio\":2000,\r\n    \"nombre_artista\":\"Canción\",\r\n    \"album\":\"editado\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3000/songs/6011df8e4e081055abca8830",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"songs",
+								"6011df8e4e081055abca8830"
+							]
+						},
+						"description": "Update de un objeto"
+					},
+					"response": []
+				},
+				{
+					"name": "http://localhost:3000/songs/:id",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{API_KEY}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"titulo\":\"In your eyes\",\r\n    \"nombre_artista\":\"The Weeknd\",\r\n    \"album\":\"After hours\",\r\n    \"anio\":2020\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3000/songs/600f1a252454993053f34c81",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"songs",
+								"600f1a252454993053f34c81"
+							]
+						},
+						"description": "Borrar cancion"
+					},
+					"response": []
+				},
+				{
+					"name": "http://localhost:3000/songs/600557fca3125b00ea69ea45",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{API_KEY}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"titulo\":\"La ultima canción\",\r\n    \"nombre_artista\":\"Rels B\",\r\n    \"album\":\"La isla P\",\r\n    \"anio\":2020\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3000/songs/600f1a252454993053f34c81",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"songs",
+								"600f1a252454993053f34c81"
+							]
+						},
+						"description": "Obtener info una canción"
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "ListasReproduccion",
+			"item": [
+				{
+					"name": "http://localhost:3000/list/",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{API_KEY}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3000/list/",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"list",
+								""
+							]
+						},
+						"description": "Obtener todas las listas de reproduccion"
+					},
+					"response": []
+				},
+				{
+					"name": "http://localhost:3000/list/:id",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{API_KEY}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3000/list/600d329ffdd12d08768da1eb",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"list",
+								"600d329ffdd12d08768da1eb"
+							]
+						},
+						"description": "Obtener descripcion de una lista de reproduccion"
+					},
+					"response": []
+				},
+				{
+					"name": "http://localhost:3000/list/",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{API_KEY}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{   \r\n    \"name\":\"PlayList1\",\r\n    \"descripcion\":\"Primera PlayList \"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3000/list/",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"list",
+								""
+							]
+						},
+						"description": "Crear lista de reproducción"
+					},
+					"response": []
+				},
+				{
+					"name": "http://localhost:3000/list/:id",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{API_KEY}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"titulo\":\"In your eyes\",\r\n    \"nombre_artista\":\"The Weeknd\",\r\n    \"album\":\"After hours\",\r\n    \"anio\":2020\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3000/list/600ee9ae3665f013349f5114",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"list",
+								"600ee9ae3665f013349f5114"
+							]
+						},
+						"description": "eliminar lista reproduccion"
+					},
+					"response": []
+				},
+				{
+					"name": "http://localhost:3000/list/6005fa1b869c4909fa90de5d",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{API_KEY}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\":\"Nombre editado\",\r\n    \"descripcion\":\"descripcion editada\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3000/list/6011e01a4e081055abca8831",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"list",
+								"6011e01a4e081055abca8831"
+							]
+						},
+						"description": "Peticion de edicion de listas de reproduccion"
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Autentificador",
+			"item": [
+				{
+					"name": "http://localhost:3000/auth/register",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"nombre_completo\":\"Christian Payo Parra\",\r\n    \"nombre_usuario\":\"christianPP\",\r\n    \"email\":\"christianpayo32@gmail.com\",\r\n    \"password\":\"12345678\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3000/auth/register",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"auth",
+								"register"
+							]
+						},
+						"description": "Registro usuario"
+					},
+					"response": []
+				},
+				{
+					"name": "http://localhost:3000/auth/login",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"nombre_usuario\":\"christianPP\",\r\n    \"password\":\"12345678\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3000/auth/login",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"auth",
+								"login"
+							]
+						},
+						"description": "Ruta para logearse con usuario y contraseña"
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "ListasReproduccionCanciones",
+			"item": [
+				{
+					"name": "http://localhost:3000/list/6005fa1b869c4909fa90de5d/songs",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{API_KEY}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3000/list/600c283943bbea3113efc355/songs",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"list",
+								"600c283943bbea3113efc355",
+								"songs"
+							]
+						},
+						"description": "Obtener las canciones de una lista de reproduccion"
+					},
+					"response": []
+				},
+				{
+					"name": "http://localhost:3000/list/6005fa1b869c4909fa90de5d/songs",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{API_KEY}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3000/list/6011e01a4e081055abca8831/songs/6011df8e4e081055abca8830",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"list",
+								"6011e01a4e081055abca8831",
+								"songs",
+								"6011df8e4e081055abca8830"
+							]
+						},
+						"description": "Agregar Cancion a lista reproduccion"
+					},
+					"response": []
+				},
+				{
+					"name": "http://localhost:3000/list/6005fa1b869c4909fa90de5d/songs/6005cb8eb4f0de3c58e673d3",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{API_KEY}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3000/list/600882572319092d746177eb/songs/600557fca3125b00ea69ea45",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"list",
+								"600882572319092d746177eb",
+								"songs",
+								"600557fca3125b00ea69ea45"
+							]
+						},
+						"description": "Obtener una cancion de una lista de reproducción"
+					},
+					"response": []
+				},
+				{
+					"name": "http://localhost:3000/list/6005fa1b869c4909fa90de5d/songs/6005cb8eb4f0de3c58e673d3",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{API_KEY}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3000/list/6005fa1b869c4909fa90de5d/songs/6005cb8eb4f0de3c58e673d3",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"list",
+								"6005fa1b869c4909fa90de5d",
+								"songs",
+								"6005cb8eb4f0de3c58e673d3"
+							]
+						},
+						"description": "Eliminar canción de una lista de reproducción"
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}

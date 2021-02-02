@@ -1,0 +1,33 @@
+[{
+  "_id": {
+    "$oid": "600ab161c16f64037c9e1e03"
+  },
+  "nombre_completo": "Christian Payo Parra",
+  "nombre_usuario": "christianPP",
+  "email": "christianpayo32@gmail.com",
+  "password": "$2a$12$rTEnXddxTc.5ooT3ufgSPOIXjhBetjv086cygW.6R5w1/Lv9CRa.q"
+},{
+  "_id": {
+    "$oid": "60103ad5c8b5e00323059547"
+  },
+  "nombre_completo": "Santiago Sosa",
+  "nombre_usuario": "sosa",
+  "email": "sosa@gmail.com",
+  "password": "$2a$12$73qIK5jJ7VQTN.2NowiAP.fwJazUMJBGc0izXwwuB7HoR6NPvhI1O"
+},{
+  "_id": {
+    "$oid": "601187269031e00730ab6742"
+  },
+  "nombre_completo": "Christian Payo Parra",
+  "nombre_usuario": "christianPP14342",
+  "email": "christianpay3223o32@gmail.com",
+  "password": "$2a$12$Hk9OUSoXl0ex4VhYCHll6evGPfV7J2eRo5//wfx5bANTTGm7Yq4IO"
+},{
+  "_id": {
+    "$oid": "60196ed69879cf01352e554c"
+  },
+  "nombre_completo": "Usuario",
+  "nombre_usuario": "usuario",
+  "email": "usuario@gmail.com",
+  "password": "$2a$12$/Q8X4KbQhCYqOY705Q4NzOGUyDy8kR9DKUWUaa.FbuQm9lkRPWqiW"
+}]

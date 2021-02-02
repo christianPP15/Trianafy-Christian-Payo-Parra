@@ -1,0 +1,41 @@
+[{
+  "_id": {
+    "$oid": "600948ea205b810bde4e5eaf"
+  },
+  "titulo": "Héroes del sábado",
+  "nombre_artista": "La maravillosa orquesta del alcohol",
+  "album": "Salvavida (de las balas perdidas)",
+  "anio": 2017
+},{
+  "_id": {
+    "$oid": "6009490f205b810bde4e5eb0"
+  },
+  "titulo": "Si hubieras querido",
+  "nombre_artista": "Pablo Alborán",
+  "album": "Vértigo",
+  "anio": 2020
+},{
+  "_id": {
+    "$oid": "601905f5fe21ad02af713a57"
+  },
+  "titulo": "Rolling in the Deep",
+  "nombre_artista": "Adele",
+  "album": "21",
+  "anio": 2011
+},{
+  "_id": {
+    "$oid": "60190637fe21ad02af713a58"
+  },
+  "titulo": "That's Life",
+  "nombre_artista": "Frank Sinatra",
+  "album": "That's Life",
+  "anio": 1966
+},{
+  "_id": {
+    "$oid": "6019068bfe21ad02af713a59"
+  },
+  "titulo": "drivers license",
+  "nombre_artista": "Olivia Rodrigo",
+  "album": "drivers license",
+  "anio": 2021
+}]

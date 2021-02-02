@@ -1,0 +1,52 @@
+[{
+  "_id": {
+    "$oid": "60196f5f9879cf01352e554d"
+  },
+  "canciones": [
+    {
+      "$oid": "600948ea205b810bde4e5eaf"
+    },
+    {
+      "$oid": "60190637fe21ad02af713a58"
+    }
+  ],
+  "name": "PlayListEjemplo",
+  "descripcion": "Play List de ejemplo",
+  "usuario_id": {
+    "$oid": "60196ed69879cf01352e554c"
+  }
+},{
+  "_id": {
+    "$oid": "60196fc19879cf01352e5550"
+  },
+  "canciones": [
+    {
+      "$oid": "601905f5fe21ad02af713a57"
+    },
+    {
+      "$oid": "6019068bfe21ad02af713a59"
+    }
+  ],
+  "name": "Segunda play list",
+  "descripcion": "Play List de ejemplo numero 2",
+  "usuario_id": {
+    "$oid": "60196ed69879cf01352e554c"
+  }
+},{
+  "_id": {
+    "$oid": "6019710d9879cf01352e5553"
+  },
+  "canciones": [
+    {
+      "$oid": "6009490f205b810bde4e5eb0"
+    },
+    {
+      "$oid": "601905f5fe21ad02af713a57"
+    }
+  ],
+  "name": "Play list christian",
+  "descripcion": "Play List de ejemplo numero 2",
+  "usuario_id": {
+    "$oid": "600ab161c16f64037c9e1e03"
+  }
+}]
