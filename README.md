@@ -29,6 +29,16 @@ Pasos para ejecutar el proyecto:
   - JWT_ALGORITHM=HS256 #Algoritmo de jwt
 4. Ejecutar el proyecto con npm start
 
+Importar datos de ejemplo ejecutando los siguientes comandos:
+- mongoimport --db trianafy --collection cancions --type json --file cancions.json --jsonArray
+- mongoimport --db trianafy --collection usuarios --type json --file usuarios.json --jsonArray
+- mongoimport --db trianafy --collection listareproduccions --type json --file listareproduccions.json --jsonArray
+Estos comando deberá ejecutarlos en consola en el directorio DataBase.
+
+Para importar el fichero de postman simplemente abrimos la aplicación y en el navbar superior nos da la opción de importar
+solo debemos indicar que archivo importar y ya estaría listo para usar.
+
+Contamos con un usuario de ejemplo cuyo nombre de usuarios es "usuario" y su contraseña "1234"
 
 Encontramos los siguientes 4 endpoint:
 - /songs
